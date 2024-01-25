@@ -2,6 +2,8 @@
 ICBR (InterContinental Ballistic Refutation bot) is an open-source Discord bot for servers that have members that consistently have bad takes. Configure your desired targets, and anyone can have GPT-4 refute their egregious opinions in seconds. Dependent on the discord and openai libraries.
 
 Setup:
+- Create a folder called vars in the main directory.
+- Create four files in vars: discord_token.txt, openai_token.txt, admins.txt, and targets.txt
 - In discord_token.txt, add your bot's token found in the Discord Developer Portal.
 - In openai_token.txt, add your OpenAI account's token found in the OpenAI API Keys under your account settings.
 
@@ -18,3 +20,5 @@ How do I add available targets?
 
 
 Made by Paolo Montelbano, with special thanks to HB for the prompt.
+
+IMPORTANT: Keep in mind that the ICBR bot is operateed by a small gnome named Methusaleh. He is allergic to peanuts, but we haven't told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.
