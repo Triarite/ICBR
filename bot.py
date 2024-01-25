@@ -1,30 +1,77 @@
+import os
 import openai
 from openai import OpenAI
 import discord
 from discord.ext import commands
 
+send_warnings = True
+
 ### INSTANTIATION SECTION ###
+
+
+def verify(path):
+    if os.path.exists(path):
+        return True
+
+def handleErrors():
+    if not verify('./vars'):
+        print("No vars folder detected! Creating vars folder...")
+        os.mkdir("vars")
+
+    if not verify('./vars/discord_token.txt'):
+        print("No discord token file exists! Creating now, but it needs to be filled manually. See readme.")
+        f = open("./vars/discord_token.txt", "x")
+        f.close()
+
+    if not verify('./vars/openai_token.txt'):
+        print("No OpenAI token file exists! Creating now, but it needs to be filled manually. See readme.")
+        f = open("./vars/openai_token.txt", "x")
+        f.close()
+
+    if not verify('./vars/targets.txt'):
+        print("No targets file exists! Creating now, but it needs to be filled manually.")
+        f = open("./vars/targets.txt", "x")
+        f.close()
+
+    if not verify('./vars/admins.txt'):
+        print("No admins file exists! Creating now...")
+        f = open("./vars/admins.txt", "x")
+        f.close()
+handleErrors()
 
 targets = []
 admins = []
 
-f_targets = open("vars/targets.txt", "r")
-for line in f_targets:
-    target = line.strip()
-    targets.append(target)
-print(f"Current targets list: {targets}")
+if verify('./vars/targets.txt'):
+    f_targets = open("vars/targets.txt", "r")
+    for line in f_targets:
+        target = line.strip()
+        targets.append(target)
+    print(f"Current targets list: {targets}")
+else:
+    print("No targets file detected. The targets file is necessary for the bot's operation. Quitting now...")
+    exit()
 
-f_admins = open("vars/admins.txt", "r")
-for line in f_admins:
-    admin = line.strip()
-    admins.append(admin)
-print(f"Current admins list: {admins}")
+if verify('./vars/admins.txt'):
+    f_admins = open("vars/admins.txt", "r")
+    for line in f_admins:
+        admin = line.strip()
+        admins.append(admin)
+    print(f"Current admins list: {admins}")
+elif send_warnings == True:
+    print("No admins file detected. This is optional, and allows usage of the //godrefute command. If you want this warning muted, set the send_warnings value at the top of the bot.py file to False.")
 
 # Grabs OpenAI Token
+if os.stat("./vars/openai_token.txt").st_size == 0:
+    print("No OpenAI API key detected in file! See the readme for the fix. Quitting...")
+    exit()
 f_openai = open("vars/openai_token.txt", "r")
 openai.api_key = f_openai.readline()
 
 # Grabs Discord App Token
+if os.stat("./vars/discord_token.txt").st_size == 0:
+    print("No Discord token detected in file! See the readme for the fix. Quitting...")
+    exit()
 f_discord = open("vars/discord_token.txt", "r")
 discord_token = f_discord.readline()
 intents = discord.Intents.all()
@@ -82,7 +129,7 @@ async def on_ready():
 # Refutes, but only against verified targets (in targets list at top)
 @bot.command(name='refute')
 async def refute(ctx):
-    print("Command received: refute")
+    print(f"Command received from {ctx.message.author.name}: refute")
     msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
     if msg.author.name in targets:
         await ctx.send(getOutput(getPrompt(msg.content)))
@@ -92,7 +139,7 @@ async def refute(ctx):
 # Refutes against anyone, but only if subject is in gods list (gods list at top)
 @bot.command(name='godrefute')
 async def godrefute(ctx):
-    print("Command received: godrefute")
+    print(f"Command received from {ctx.message.author.name}: godrefute")
     msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
     if ctx.message.author.name in admins:
         await ctx.send(getOutput(getPrompt(msg.content)))
@@ -102,13 +149,15 @@ async def godrefute(ctx):
 # Prints to console an analysis of the message
 @bot.command(name='analyze')
 async def analyze(ctx):
-    print("Command received: analyze")
+    print(f"Command received {ctx.message.author.name}: analyze")
     msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
     print(msg)
+
 
 # Kills bot
 @bot.command(name='die')
 async def die(ctx):
+    print(f"Command received from {ctx.message.author.name}: die")
     print("Logging out...")
     exit()
 
