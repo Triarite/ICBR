@@ -9,7 +9,6 @@ Setup:
 Usage:
 - Anyone can reply to a message from a verified target with the //refute command to have GPT-4 smash their opinions.
 - Verified admins can use the //godrefute command to bypass the target system and refute anyone.
-- 
 
 How do I add admins for //godrefute?
 - Go to vars/admins.txt and add their username on an empty line.
@@ -20,4 +19,4 @@ How do I add available targets?
 
 Made by Paolo Montelbano, with special thanks to HB for the prompt.
 
-IMPORTANT: Keep in mind that the ICBR bot is operateed by a small gnome named Methusaleh. He is allergic to peanuts, but we haven't told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.
+IMPORTANT: Keep in mind that the ICBR bot is operateed by a small gnome named Methusaleh. He is allergic to peanuts, but we haven't officially told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.
