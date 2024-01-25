@@ -4,7 +4,13 @@ from openai import OpenAI
 import discord
 from discord.ext import commands
 
+# This boolean determines if warnings will be sent in the console if something isn't right, but it isn't critical to the bot's function.
+# Default: True
 send_warnings = True
+
+# This boolean determines if ALL members are able to be refuted, not just targets.
+# Default: False
+global_refute_perms = False
 
 ### INSTANTIATION SECTION ###
 
@@ -131,7 +137,7 @@ async def on_ready():
 async def refute(ctx):
     print(f"Command received from {ctx.message.author.name}: refute")
     msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
-    if msg.author.name in targets:
+    if msg.author.name in targets or global_refute_perms == True:
         await ctx.send(getOutput(getPrompt(msg.content)))
     else:
         await ctx.send("ERROR: Invalid target.")
