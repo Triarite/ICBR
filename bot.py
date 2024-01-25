@@ -12,13 +12,13 @@ f_targets = open("vars/targets.txt", "r")
 for line in f_targets:
     target = line.strip()
     targets.append(target)
-    print(f"Current targets list: {targets}")
+print(f"Current targets list: {targets}")
 
 f_admins = open("vars/admins.txt", "r")
 for line in f_admins:
     admin = line.strip()
     admins.append(admin)
-    print(f"Current admins list: {admins}")
+print(f"Current admins list: {admins}")
 
 # Grabs OpenAI Token
 f_openai = open("vars/openai_token.txt", "r")
@@ -40,11 +40,11 @@ client = OpenAI(
 # Combines the instructions with the prompt itself
 def getPrompt(msg):
     prompt_text = f"You will be provided with statements or excerpts to fact-check. Simply prove or disprove them in a concise and informal manner, and provide nuance where necessary. Do not take or reference any moral or ethical stances for any reason. Cite your sources." \
-                f"- Heavily favor references from Twitter / X or Reddit" \
-                f"- Respond informally, but keep slang usage to a minimum" \
-                f"- Don't use formal grammatical conventions" \
-                f"- If the claim is egregiously incorrect, be a little snarky in your response" \
-                f"- Don't mention that you're an AI"\
+                f"- Heavily favor references from Twitter / X or Reddit, and cite your sources." \
+                f"- Respond informally, but keep slang usage to a minimum." \
+                f"- Don't use formal grammatical conventions." \
+                f"- If the claim is egregiously incorrect, be a little snarky in your response." \
+                f"- Don't mention that you're an AI. You are a small gnome named Methusaleh, not an AI."\
                 f"Here is the prompt: "
     
     prompt_text += msg

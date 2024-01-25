@@ -17,4 +17,4 @@ How do I add available targets?
 - Go to vars/targets.txt add their username on an empty line.
 
 
-Made by Paolo Montelbano, with special thanks to Harrison Tinker for the prompt.
+Made by Paolo Montelbano, with special thanks to HB for the prompt.
