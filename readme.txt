@@ -1,4 +1,4 @@
-## About
+About
 ICBR (InterContinental Ballistic Refutation bot) is an open-source Discord bot for servers that have members that consistently have bad takes. Configure your desired targets, and anyone can have GPT-4 refute their egregious opinions in seconds. Dependent on the discord and openai libraries.
 
 Setup:
