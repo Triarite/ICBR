@@ -9,7 +9,7 @@ Setup:
 
 Usage:
 - Anyone can reply to a message from a verified target with the //refute command to have GPT-4 smash their opinions.
-- Verified admins can use the //godrefute command to bypass the target system.
+- Verified admins can use the //godrefute command to bypass the target system and refute anyone.
 - 
 
 How do I add admins for //godrefute?
