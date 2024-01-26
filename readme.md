@@ -27,4 +27,4 @@ I want to allow everyone to be refuted, not just targets. How do I do this?
 
 Made by Paolo Montelbano, with special thanks to HB for the prompt.
 
-IMPORTANT: Keep in mind that the ICBR bot is operateed by a small gnome named Methusaleh. He is allergic to peanuts, but we haven't officially told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.
+IMPORTANT: Keep in mind that the ICBR bot is operated by a small gnome named Methusaleh. He's allergic to peanuts, but we haven't officially told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.
