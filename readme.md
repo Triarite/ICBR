@@ -7,7 +7,7 @@ ICBR (InterContinental Ballistic Refutation bot) is an open-source Discord bot f
   - https://discord.com/developers/applications
 - In openai_token.txt, add your OpenAI account's token found in the OpenAI API Keys under your account settings.
   - https://platform.openai.com/api-keys
-- In the targets.txt file, add the usernames of one or more server members. Anyone will be able to reply to a target's message with //refute to have that person's point refuted.
+- In the targets.txt file, add the usernames of one or more server members separated by newlines. Anyone will be able to reply to a target's message with //refute to have that person's point refuted.
 - In the admins.txt file, optionally add the usernames of members who should be able to use the //godrefute command. //godrefute bypasses the need for the subject of the refutation to be in the targets.txt file.
 
 ## Usage
