@@ -25,6 +25,6 @@ I want to allow everyone to be refuted, not just targets. How do I do this?
 - At the top of the bot.py file, set global_refute_perms to True.
 
 
-Made by Paolo Montelbano, with special thanks to HB for the prompt.
+Made by Paolo Montelbano.
 
 IMPORTANT: Keep in mind that the ICBR bot is operated by a small gnome named Methusaleh. He's allergic to peanuts, but we haven't officially told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.
