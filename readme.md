@@ -7,15 +7,16 @@ ICBR (InterContinental Ballistic Refutation bot) is an open-source Discord bot f
   - https://discord.com/developers/applications
 - In openai_token.txt, add your OpenAI account's token found in the OpenAI API Keys under your account settings.
   - https://platform.openai.com/api-keys
-- In the targets.txt file, add the usernames of one or more server members separated by newlines. Anyone will be able to reply to a target's message with //refute to have that person's point refuted.
-- In the admins.txt file, optionally add the usernames of members who should be able to use the //godrefute command. //godrefute bypasses the need for the subject of the refutation to be in the targets.txt file.
+- In the targets.txt file, add the usernames of one or more server members separated by newlines. Anyone will be able to have that person's point refuted.
+- In the admins.txt file, optionally add the usernames of members who should be able to refute anyone, not just verified targets. This is internally called a "god refute".
 
 ## Usage
-- Anyone can reply to a message from a verified target with the //refute command to have GPT-4 smash their opinions.
-- Verified admins can use the //godrefute command to bypass the target system and refute anyone.
+- Anyone can right-click/hold-tap a message from a verified target, and use the "refute" app command to have GPT-4 smash their opinions.
+- Verified admins can bypass the target system and refute anyone, called a "god refute".
+- Verified admins can also use /sync to automatically push new commands, descriptions, parameters, etc. to all guilds. Should be used sparingly, as syncing is liable to harsh rate limits.
 
 ## FAQ
-How do I add admins for //godrefute?
+How do I add admins for god refuting?
 - Go to vars/admins.txt and add their username on an empty line.
 
 How do I add available targets?
@@ -25,6 +26,6 @@ I want to allow everyone to be refuted, not just targets. How do I do this?
 - At the top of the bot.py file, set global_refute_perms to True.
 
 
-Made by Paolo Montelbano, with special thanks to HB for the prompt.
+Made by Paolo Montelbano, with special thanks to HB for parts of the prompt.
 
 IMPORTANT: Keep in mind that the ICBR bot is operated by a small gnome named Methusaleh. He's allergic to peanuts, but we haven't officially told him that yet, so whatever you do- DO NOT FEED METHUSALEH PEANUT PRODUCTS.

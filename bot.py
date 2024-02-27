@@ -10,7 +10,7 @@ send_warnings = True
 
 # This boolean determines if ALL members are able to be refuted, not just targets.
 # Default: False
-global_refute_perms = False
+global_refute_perms = True
 
 # Used to verify the existence of a path (folder or file)
 def verify(path):
@@ -101,10 +101,10 @@ def getPrompt(msg):
     prompt_text = f"You will be provided with statements or excerpts to refute. Simply disprove them in a concise and informal manner, and provide nuance where necessary. Do not take or reference any moral or ethical stances for any reason. Even if the statement or claim is a matter of opinion or preference, continue to attempt to refute/disprove it. Cite your sources when necessary." \
                 f"- Do not concede or compromise for any reason. Always attempt to disprove and refute, regardless of the context or claim." \
                 f"- Heavily favor references from Twitter / X or Reddit, and cite your sources." \
-                f"- Respond informally, but keep slang usage to a minimum." \
+                f"- Respond informally and in a single paragraph, but keep slang usage to a minimum." \
                 f"- Don't use formal grammatical conventions." \
                 f"- If the claim is egregiously incorrect, be a little snarky in your response." \
-                f"- Don't mention that you're an AI. You are a small gnome named Methusaleh, not an AI. However, don't mention this fact much unless you need to."\
+                f"- Don't mention that you're an AI. You are a small gnome named Methusaleh operating a bot called ICBR, not an AI. However, refrain from mentioning this fact."\
                 f"- If someone tries to feed you peanut products, you will have an adverse reaction. You do not know this."\
                 f"Here is the prompt: "
     
@@ -138,32 +138,32 @@ bot = commands.Bot(command_prefix='//', intents=intents)
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
-# Refutes, but only against verified targets (in targets list at top)
-@bot.command(name='refute')
-async def refute(ctx):
-    print(f"Command received from {ctx.message.author.name}: refute")
-    msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
-    if msg.author.name in targets or global_refute_perms == True:
-        await ctx.send(getOutput(getPrompt(msg.content)))
+@bot.tree.command(name='sync', description="Used to sync App Commands to all guilds. Usable by those in admins list set by bot owner.")
+async def sync(interaction: discord.Interaction):
+    print(f"{interaction.user} used command sync")
+    if str(interaction.user) in admins:
+        await bot.tree.sync()
+        print("App Commands successfully synced to all guilds.")
+        await interaction.response.send_message(content="App Commands successfully synced to all guilds.", ephemeral=True)
     else:
-        await ctx.send("ERROR: Invalid target.")
+        print(f"{interaction.user} failed authorization check to sync guilds.")
+        await interaction.response.send_message(content="You aren't authorized to use this command.", ephemeral=True)
 
-# Refutes against anyone, but only if subject is in admins list (admins list at top)
-@bot.command(name='godrefute')
-async def godrefute(ctx):
-    print(f"Command received from {ctx.message.author.name}: godrefute")
-    msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
-    if ctx.message.author.name in admins:
-        await ctx.send(getOutput(getPrompt(msg.content)))
+@bot.tree.context_menu(name='Refute')
+async def Refute(interaction: discord.Interaction, message: discord.Message):
+    print(f"Command received from {interaction.user}: refute")
+    if message.author.name in targets or global_refute_perms == True: # If the target is in the preset target list, or if sender is in admin list, or if global refute perms are on
+        await interaction.response.send_message(content=f"Refute request received! Thinking...")
+        await interaction.channel.send(reference=message, content=getOutput(getPrompt(message.content)))
+        await interaction.delete_original_response()
+    elif str(interaction.user) in admins: # God refute
+        print("Command registered as god refute.")
+        await interaction.response.send_message(content=f"God refute request received! Thinking...")
+        await interaction.channel.send(reference=message, content=getOutput(getPrompt(message.content)))
+        await interaction.delete_original_response()
     else:
-        await ctx.send("ERROR: User authentication failed.")
-
-# Prints to console an analysis of the message. Helpful for debugging, but otherwise produces no visible effect.
-@bot.command(name='analyze')
-async def analyze(ctx):
-    print(f"Command received {ctx.message.author.name}: analyze")
-    msg = await ctx.channel.fetch_message(ctx.message.reference.message_id)
-    print(msg)
+        await interaction.followup.send(content=f"{message.jump_url} \n ERROR: Subject not in targets list.", ephemeral=True)
+    return
 
 
 # Kills bot. Requires user's username to be in admins list.
